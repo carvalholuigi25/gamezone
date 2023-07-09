@@ -1,19 +1,20 @@
+import { Home, ReviewDetails, About } from '../screens';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from "../screens/home";
-import ReviewDetails from "../screens/reviewDetails";
-import About from "../screens/about";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export default function NavMyRoutes() {
-    const Stack = createNativeStackNavigator();
+    const Drawer = createDrawerNavigator();
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={Home} options={{ title: 'Home' }} />
-                <Stack.Screen name="ReviewDetails" component={ReviewDetails} options={{ title: 'Review Details' }} />
-                <Stack.Screen name="About" component={About} options={{ title: 'About' }} />
-            </Stack.Navigator>
+            <Drawer.Navigator 
+                initialRouteName="Home" 
+                backBehavior='firstRoute'
+            >
+                <Drawer.Screen name="Home" component={Home} options={{ title: 'Home' }} />
+                <Drawer.Screen name="ReviewDetails" initialParams={{ key: '0' }} component={ReviewDetails} options={{ title: 'Review Details' }} />
+                <Drawer.Screen name="About" component={About} options={{ title: 'About' }} />
+            </Drawer.Navigator>
         </NavigationContainer>
     );
 }
