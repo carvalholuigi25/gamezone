@@ -1,34 +1,41 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { myGlobalStyles } from '../styles/mystyles';
+import { StyleSheet, View, Text, Button, Image } from 'react-native';
+import { myGlobalStyles, images } from '../styles/mystyles';
+import Card from '../shared/card';
 
 class ReviewDetails extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    backHandler() {
-        this.props.navigation.navigate("ReviewDetails", { key: '0' });
-    }
-
     render() {
         const myparams = this.props.route.params;
+        const rating = myparams.rating;
         var myobj = "";
 
         if(myparams && myparams.key > 0) {
             myobj = (
                 <>
-                    <Text>{ myparams.key }</Text>
-                    <Text>{ myparams.title }</Text>
-                    <Text>{ myparams.body }</Text>
-                    <Text>{ myparams.rating }</Text>
-                    <Button title='back' onPress={() => this.backHandler()} />
+                    <Card>
+                        <Text style={myGlobalStyles.titleText}>
+                            { myparams.title } (id: { myparams.key })
+                        </Text>
+                        <Text>{ myparams.body }</Text>
+                        <View style={styles.rating}>
+                            <Text>GameZone rating: </Text>
+                            <Image source={images.ratings[rating]} />
+                        </View>
+                    </Card>
                 </>
             );
         } else {
             myobj = (
                 <>
-                    <Text>Welcome to the my review details!</Text>
+                    <Card>
+                        <Text style={myGlobalStyles.titleText}>
+                            Welcome to the my review details!
+                        </Text>
+                    </Card>
                 </>
             );
         }
@@ -42,3 +49,14 @@ class ReviewDetails extends React.Component {
 }
 
 export default ReviewDetails;
+
+const styles = StyleSheet.create({
+    rating: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingTop: 16,
+      marginTop: 16,
+      borderTopWidth: 1,
+      borderTopColor: '#eee',
+    }
+});

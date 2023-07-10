@@ -7,8 +7,10 @@ import { createDrawerNavigator, DrawerNavigationOptions } from '@react-navigatio
 const Drawer = createDrawerNavigator();
 
 export default function NavMyRoutes() {
-    const myHeader = () => {
+    const myHeader: DrawerNavigationOptions = (title) => {
         return {
+            title: title,
+            headerTitleAlign: 'center',
             headerTitle: (props) => {
                 return (
                     <Header title={`GameZone`} />
@@ -22,9 +24,9 @@ export default function NavMyRoutes() {
     return (
         <NavigationContainer>
             <Drawer.Navigator>
-                <Drawer.Screen name="Home" component={Home} options={myHeader} />
-                <Drawer.Screen name="ReviewDetails" initialParams={initParams} component={ReviewDetails} options={myHeader} />
-                <Drawer.Screen name="About" component={About} options={myHeader} />
+                <Drawer.Screen name="Home" component={Home} options={myHeader("Home")} />
+                <Drawer.Screen name="ReviewDetails" initialParams={initParams} component={ReviewDetails} options={myHeader("Review Details")} />
+                <Drawer.Screen name="About" component={About} options={myHeader("About")} />
             </Drawer.Navigator>
         </NavigationContainer>
     );
